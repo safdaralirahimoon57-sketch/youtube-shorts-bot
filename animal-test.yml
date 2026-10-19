@@ -1,0 +1,29 @@
+name: Test Bawaal Beasts Story Generator
+
+on:
+workflow_dispatch:
+
+permissions:
+contents: read
+
+jobs:
+test-story:
+runs-on: ubuntu-latest
+
+steps:
+  - name: Download repository code
+    uses: actions/checkout@v4
+
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.11"
+
+  - name: Generate animal story
+    run: python animal_short.py
+
+  - name: Save generated story
+    uses: actions/upload-artifact@v4
+    with:
+      name: bawaal-beasts-story
+      path: output/story.json
